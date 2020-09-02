@@ -3,12 +3,12 @@ entries:
   graphql-gateway:
   - apiVersion: v2
     appVersion: v0.2.5
-    created: "2020-09-03T00:39:35.0438524+02:00"
+    created: "2020-09-03T00:54:00.2093428+02:00"
     description: Graphql gateway helm chart for Kubernetes
-    digest: 465bfe066b83d0bc2d70328665347806aee0fdaff8a57c83826a268df94e9ad3
+    digest: 8dcc76e0ce0f98c5c104300c22c2ade2548adbb66b0bbb16b9af0056122acfb5
     name: graphql-gateway
     type: application
     urls:
     - graphql-gateway-0.1.0.tgz
     version: 0.1.0
-generated: "2020-09-03T00:39:35.0418541+02:00"
+generated: "2020-09-03T00:54:00.2073415+02:00"

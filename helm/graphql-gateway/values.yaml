@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: graphql/gateway
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
