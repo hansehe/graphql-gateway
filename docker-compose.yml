@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  graphql-gateway:
+    image: graphql/gateway:v0.2.5
+    ports:
+      - 8383:80
+    # environment:
+      # - GRAPHQL_URL_0=https://graphql-demo.azurewebsites.net/
+      # - GRAPHQL_URL_1=https://api.graphloc.com/graphql
