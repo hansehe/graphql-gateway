@@ -42,9 +42,13 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+          - name: HOST
+            value: http://{{ include "graphql-gateway.fullname" . }}
+          - name: PORT
+            value: {{ .Values.service.port | quote }}
           {{- range $key, $value := .Values.environmentVariables }}
           - name: {{ $key }}
-            value: {{ $value }}
+            value: {{ $value | quote }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

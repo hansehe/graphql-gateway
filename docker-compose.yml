@@ -2,9 +2,13 @@ version: '3.3'
 
 services:
   graphql-gateway:
-    image: graphql/gateway:v0.2.5
+    image: hansehe/graphql-gateway:1.0.0
+    build:
+      context: ./src
+      dockerfile: Dockerfile
     ports:
       - 8383:80
-    # environment:
-      # - GRAPHQL_URL_0=https://graphql-demo.azurewebsites.net/
-      # - GRAPHQL_URL_1=https://api.graphloc.com/graphql
+    environment:
+      - GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS=60000
+      # - GRAPHQL_URL_0=https://service_1/graphql
+      # - GRAPHQL_URL_1=https://service_2/graphql

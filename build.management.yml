@@ -6,9 +6,18 @@ run:
 
 build:
     selections:
+        service:
+            files:
+                - docker-compose.yml
         helm:
             directory: helm
             cmd: 
                 - helm template graphql-gateway
                 - helm package graphql-gateway --destination charts
                 - helm repo index ./charts
+
+publish:
+    selections:
+        service:
+            files:
+                - docker-compose.yml

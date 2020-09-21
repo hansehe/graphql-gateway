@@ -8,12 +8,17 @@ Original source code is here:
 Please also look at this graphql federation demo:
 - https://github.com/apollographql/federation-demo
 
-## Run With Docker
-- pip install --upgrade DockerBuildManagement
-    - https://github.com/DIPSAS/DockerBuildManagement
-- dbm -run
-  - Access graphql playground api at: 
-    - http://localhost:8181/graphql/
+## Run With Docker Or Docker Compose
+```bash
+docker run --rm -p 8080:80 -e GRAPHQL_URL_0=https://api.graphloc.com/graphql hansehe/graphql-gateway
+```
+
+```bash
+# Set GRAPHQL_URL_0 environment variable first..
+docker-compose -f docker-compose.yml up
+```
+Access graphql playground api at: 
+- http://localhost:8181/graphql/
 
 ## Use Helm Repo
 ```bash

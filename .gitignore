@@ -17,6 +17,7 @@ __pycache__/
 venv/
 output/
 ~$*
+debug.log
 
 docker-compose.build.*.yml
 docker-compose.run.*.yml
