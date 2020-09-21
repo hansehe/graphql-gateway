@@ -7,6 +7,7 @@ run:
 build:
     selections:
         service:
+            additionalTag: latest
             files:
                 - docker-compose.yml
         helm:
@@ -19,5 +20,6 @@ build:
 publish:
     selections:
         service:
+            additionalTag: latest
             files:
                 - docker-compose.yml
