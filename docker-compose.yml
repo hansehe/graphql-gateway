@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   graphql-gateway:
-    image: hansehe/graphql-gateway:1.0.0
+    image: hansehe/graphql-gateway:${VERSION:-latest}
     build:
       context: ./src
       dockerfile: Dockerfile

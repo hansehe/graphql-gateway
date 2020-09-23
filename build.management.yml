@@ -14,8 +14,6 @@ build:
             directory: helm
             cmd: 
                 - helm template graphql-gateway
-                - helm package graphql-gateway --destination charts
-                - helm repo index ./charts
 
 publish:
     selections:
@@ -23,3 +21,9 @@ publish:
             additionalTag: latest
             files:
                 - docker-compose.yml
+        helm:
+            directory: helm
+            cmd: 
+                - helm template graphql-gateway
+                - helm package graphql-gateway --destination charts --app-version ${VERSION}
+                - helm repo index ./charts
