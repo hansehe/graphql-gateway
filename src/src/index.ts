@@ -5,7 +5,10 @@ import { getENV, getENVArray } from "./env";
 const start = async () => {
 
     const uris = getENVArray("GRAPHQL_URL");
-    const schema = await getRemoteSchemas(uris);
+    const schema = await getRemoteSchemas(uris).catch((e) => {
+        console.error(e);
+        process.exit(1);
+    });
 
     const server = new GraphQLServer({
         schema,
