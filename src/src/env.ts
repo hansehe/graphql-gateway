@@ -2,7 +2,7 @@ try {
   require('dotenv').config();
 } catch (err) {}
 
-getENV = (name, defaultValue) => {
+export const getENV = (name, defaultValue) => {
   const value = process.env[name] || defaultValue;
 
   if (typeof value === 'undefined') {
@@ -11,9 +11,8 @@ getENV = (name, defaultValue) => {
 
   return value;
 };
-module.exports.getENV = getENV;
 
-module.exports.getENVArray = prefix => {
+export const getENVArray = prefix => {
   let result = [];
 
   let value = getENV(prefix, null);

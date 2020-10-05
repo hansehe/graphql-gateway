@@ -5,11 +5,11 @@ WORKDIR /app
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
-RUN rm -rf node_modules && \
-    npm install --only=production && \
-    npm install apollo-engine-binary-linux
+RUN npm install
 
 COPY . .
+
+ENV PORT=80
 
 ENTRYPOINT [ "npm" ]
 CMD [ "start" ] 

@@ -1,16 +1,25 @@
 {
-  "dependencies": {
-    "@apollo/gateway": "^0.20.1",
-    "apollo-server": "^2.17.0",
-    "apollo-server-express": "^2.17.0",
-    "express": "^4.17.1",
-    "graphql": "^15.3.0"
-  },
+  "name": "gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "start-local": "PORT=3000 node index"
+    "start": "ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
+    "graphql-tools": "^2.24.0",
+    "graphql-yoga": "^1.4.3",
+    "subscriptions-transport-ws": "^0.9.6",
+    "ws": "^4.1.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "npm-run-all": "4.1.2",
+    "ts-node": "4.1.0",
+    "typescript": "2.7.2"
   }
 }
