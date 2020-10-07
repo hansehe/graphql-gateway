@@ -11,6 +11,7 @@
   "dependencies": {
     "apollo-server": "^2.18.2",
     "apollo-server-express": "^2.18.2",
+    "apollo-link-context": "^1.0.20",
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
     "body-parser": "^1.19.0",

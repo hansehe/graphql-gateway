@@ -2,8 +2,23 @@ const http = require('http');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 
-import { getRemoteSchemas } from "./remote-schema/";
+import { getRemoteSchemas, httpUriToWsUri } from "./remote-schema";
 import { getENV, getENVArray } from "./env";
+
+function getApolloServer(schema) {
+    return new ApolloServer({ 
+        schema: schema,
+        context: async ({ req, connection }) => {
+            if (connection) {
+                return connection.context;
+            } else {
+                return {
+                    req
+                };
+            }
+        } 
+    })
+}
 
 const start = async () => {
     const uris = getENVArray("GRAPHQL_URL");
@@ -15,13 +30,10 @@ const start = async () => {
     const HOST: string = getENV("HOST", "http://localhost");
     const PORT: string = getENV("PORT", "4000");
 
-    let WS_HOST = HOST.replace('http:', 'ws:');
-    if (HOST.startsWith('https:')) {
-        WS_HOST = HOST.replace('https:', 'wss:');
-    }
+    let WS_HOST = httpUriToWsUri(HOST);
 
     const app = express();
-    let server = new ApolloServer({ schema })
+    let server = getApolloServer(schema);
 
     let middleware = server.getMiddleware({});
 
@@ -43,7 +55,7 @@ const start = async () => {
                 });
                 if (updatedSchema) {
                     schema = updatedSchema
-                    server = new ApolloServer({ schema })
+                    server = getApolloServer(schema);
                     middleware = server.getMiddleware({});
                 }
             } catch (error) {
