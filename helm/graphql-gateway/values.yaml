@@ -13,7 +13,7 @@ nameOverride: ""
 fullnameOverride: ""
 environmentVariables: {}
   # HOST: http://graphql.localhost
-  # GRAPHQL_UPDATE_GATEWAY: '"true"'
+  # GRAPHQL_UPDATE_GATEWAY: true
   # GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS: 60000
   # GRAPHQL_URL_0: http://service_1/graphql
   # GRAPHQL_URL_1: http://service_2/graphql

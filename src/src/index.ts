@@ -44,7 +44,7 @@ const start = async () => {
     const httpServer = http.createServer(app);
     server.installSubscriptionHandlers(httpServer);
 
-    const activateUpdateGatewayInterval = getENV("GRAPHQL_UPDATE_GATEWAY", "true") === "true";
+    const activateUpdateGatewayInterval = getENV("GRAPHQL_UPDATE_GATEWAY", "false") === "true";
     const updateGatewayInterval = getENV("GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS", "60000");
     if (activateUpdateGatewayInterval === true)
     {
