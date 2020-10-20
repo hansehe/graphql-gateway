@@ -4,8 +4,6 @@
 
 The graphql gateway service is a graphql gateway to multiple backend graphql providers.
 It is implemented with the graphql [federation specification](https://www.apollographql.com/docs/apollo-server/api/apollo-federation/).
-Original source code is here:
-- https://github.com/graphql-services/graphql-gateway
 
 Please also look at this graphql federation demo:
 - https://github.com/apollographql/federation-demo
