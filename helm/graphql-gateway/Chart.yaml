@@ -1,6 +1,17 @@
 apiVersion: v2
 name: graphql-gateway
 description: Graphql gateway helm chart for Kubernetes
+home: https://github.com/hansehe/graphql-gateway
+icon: https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/graphql.png
+keywords:
+- graphql
+- gateway
+- graphql-gateway
+maintainers:
+- email: hans.erik.heggem@gmail.com
+  name: hansehe
+sources:
+- https://github.com/hansehe/graphql-gateway
 
 # A chart can be either an 'application' or a 'library' chart.
 #
