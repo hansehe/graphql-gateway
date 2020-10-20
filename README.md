@@ -1,5 +1,7 @@
 # Graphql Gateway
 
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/graphql-gateway)](https://artifacthub.io/packages/search?repo=graphql-gateway)
+
 The graphql gateway service is a graphql gateway to multiple backend graphql providers.
 It is implemented with the graphql [federation specification](https://www.apollographql.com/docs/apollo-server/api/apollo-federation/).
 Original source code is here:
