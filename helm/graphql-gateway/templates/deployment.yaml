@@ -31,14 +31,14 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /graphql
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /graphql
-          #     port: http
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthCheckUrl | quote }}
+              port: http
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthCheckUrl | quote }}
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:

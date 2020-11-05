@@ -8,6 +8,7 @@ image:
   repository: hansehe/graphql-gateway
   pullPolicy: IfNotPresent
 
+healthCheckUrl: /status/health
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

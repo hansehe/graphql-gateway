@@ -1,4 +1,5 @@
 const http = require('http');
+const url = require('url');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 
@@ -38,6 +39,11 @@ const start = async () => {
     let middleware = server.getMiddleware({});
 
     app.use((req, res, next) => {
+        const pathname = url.parse(req.url).pathname;
+        if (pathname === '/status/health') {
+            res.end(JSON.stringify({healthy: true}))
+            return
+        }
         middleware(req, res, next);
     });
 
