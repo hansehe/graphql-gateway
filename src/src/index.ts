@@ -4,6 +4,8 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const filterConsole = require('filter-console');
 
+import { backOff, IBackOffOptions } from "exponential-backoff";
+import { GraphQLSchema } from "graphql";
 import { getRemoteSchemas, httpUriToWsUri } from "./remote-schema";
 import { getENV, getENVArray } from "./env";
 import { updateSchemaWithMqtt, updateSchemaWithTimer } from "./update-schema";
@@ -52,19 +54,41 @@ const start = async () => {
     const httpServer = http.createServer(app);
     server.installSubscriptionHandlers(httpServer);
 
+    const useBackOffPolicyWithSchemaUpdate: boolean = getENV("GRAPHQL_UPDATE_GATEWAY_USE_BACKOFF_POLICY", "true") === "true";
+    const backOffPolicyMaxDelay: number = parseInt(getENV("GRAPHQL_UPDATE_GATEWAY_BACKOFF_POLICY_MAX_DELAY_MS", Infinity));
+    const backOffPolicyNumOfAttempts: number = parseInt(getENV("GRAPHQL_UPDATE_GATEWAY_BACKOFF_POLICY_NUM_OF_ATTEMPTS", "10"));
+
+    const backoffOptions: Partial<IBackOffOptions> = {
+        maxDelay: backOffPolicyMaxDelay,
+        numOfAttempts: backOffPolicyNumOfAttempts,
+    }
+
+    let updatingSchemaOngoing = false;
     const updateSchema = async () => {
+        if (updatingSchemaOngoing) {
+            console.log('Schema update already ongoing..')
+            return;
+        }
+        updatingSchemaOngoing = true;
         try {
-            const updatedSchema = await getRemoteSchemas(uris).catch((e) => {
-                console.error(e);
-            });
+            let updatedSchema: GraphQLSchema | undefined = undefined;
+            if (useBackOffPolicyWithSchemaUpdate) {
+                updatedSchema = await backOff(() => getRemoteSchemas(uris), backoffOptions);
+            }
+            else {
+                updatedSchema = await getRemoteSchemas(uris);
+            }
             if (updatedSchema) {
                 const schemaDerivedData = await server.generateSchemaDerivedData(updatedSchema);
                 server.schema = updatedSchema;
                 server.schemaDerivedData = schemaDerivedData;
                 server.subscriptionServer.schema = updatedSchema;
+                console.log('Updated schema');
             }
         } catch (error) {
             console.error(error);
+        } finally {
+            updatingSchemaOngoing = false;
         }
     }
 
