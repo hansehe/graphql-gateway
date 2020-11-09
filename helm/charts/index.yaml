@@ -2,10 +2,31 @@ apiVersion: v1
 entries:
   graphql-gateway:
   - apiVersion: v2
-    appVersion: 1.0.1
-    created: "2020-11-05T17:59:25.439209+01:00"
+    appVersion: 1.0.2
+    created: "2020-11-09T13:16:13.8382609+01:00"
     description: Graphql gateway helm chart for Kubernetes
-    digest: 09de38d6edfc668b548f4e5e5d092965103f62ce6d3d90cdbe61c375a4196a6e
+    digest: 398b7a812ab8da99d340d76bae4ec48cbe918095e573f18a9d80b1b0cb0ba5af
+    home: https://github.com/hansehe/graphql-gateway
+    icon: https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/graphql.png
+    keywords:
+    - graphql
+    - gateway
+    - graphql-gateway
+    maintainers:
+    - email: hans.erik.heggem@gmail.com
+      name: hansehe
+    name: graphql-gateway
+    sources:
+    - https://github.com/hansehe/graphql-gateway
+    type: application
+    urls:
+    - graphql-gateway-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2020-11-09T13:16:13.8382609+01:00"
+    description: Graphql gateway helm chart for Kubernetes
+    digest: 5199e38338cf9d475d478219426bd5db271e4f7cea4d1d95df4a8631793ea910
     home: https://github.com/hansehe/graphql-gateway
     icon: https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/graphql.png
     keywords:
@@ -22,4 +43,4 @@ entries:
     urls:
     - graphql-gateway-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-05T17:59:25.4382069+01:00"
+generated: "2020-11-09T13:16:13.8372604+01:00"

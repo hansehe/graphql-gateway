@@ -3,13 +3,18 @@ version: '3.3'
 services:
   graphql-gateway:
     image: hansehe/graphql-gateway:${VERSION:-latest}
+    networks:
+      - backend_network
     build:
       context: ./src
       dockerfile: Dockerfile
     ports:
-      - 4000:80
+      - 8181:80
     environment:
-      - GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS=3000
+      - GRAPHQL_UPDATE_GATEWAY_WITH_TIMER=true
+      - GRAPHQL_UPDATE_GATEWAY_WITH_MQTT=true
+      - GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME=amqp
+      - GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD=amqp
       - GRAPHQL_URL_0=http://${GRAPHQL_URL_0:-service_0}/graphql
       - GRAPHQL_URL_1=http://${GRAPHQL_URL_1:-service_1}/graphql
       # Enable extra_hosts and uncomment following to do local debugging.
@@ -18,3 +23,7 @@ services:
     extra_hosts:
       # Run ifconfig/ipconfig and look for IPv4 address starting with something like 172.*, or run DumpLocalhostIP.py.
       - "localhost-remote:${LOCALHOST_IP:-0.0.0.0}"
+
+networks:
+  backend_network:
+    external: true

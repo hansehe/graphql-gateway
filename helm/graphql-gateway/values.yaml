@@ -14,8 +14,14 @@ nameOverride: ""
 fullnameOverride: ""
 environmentVariables: {}
   # HOST: http://graphql.localhost
-  # GRAPHQL_UPDATE_GATEWAY: true
+  # GRAPHQL_UPDATE_GATEWAY_WITH_TIMER: true
   # GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS: 60000
+  # GRAPHQL_UPDATE_GATEWAY_WITH_MQTT: true
+  # GRAPHQL_UPDATE_GATEWAY_MQTT_CONNECTION_STRING: ws://rabbitmq:15675/ws
+  # GRAPHQL_UPDATE_GATEWAY_MQTT_SUBSCRIPTION_TOPIC: graphql-gateway/update
+  # GRAPHQL_UPDATE_GATEWAY_MQTT_CLIENT_ID: mqtt-graphql-gateway
+  # GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME: mqtt
+  # GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD: mqtt
   # GRAPHQL_URL_0: http://service_1/graphql
   # GRAPHQL_URL_1: http://service_2/graphql
 

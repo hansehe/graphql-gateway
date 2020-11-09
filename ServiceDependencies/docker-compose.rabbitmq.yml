@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: hansehe/rabbitmq-mqtt:latest
+    hostname: rabbitmq
+    ports:
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
+      - 15673:15673
+      - 15675:15675
+      - 8883:8883
+      - 1883:1883
+    environment:
+      RABBITMQ_NODENAME: rabbit
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    external: true

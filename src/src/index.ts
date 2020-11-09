@@ -2,9 +2,11 @@ const http = require('http');
 const url = require('url');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
+const filterConsole = require('filter-console');
 
 import { getRemoteSchemas, httpUriToWsUri } from "./remote-schema";
 import { getENV, getENVArray } from "./env";
+import { updateSchemaWithMqtt, updateSchemaWithTimer } from "./update-schema";
 
 function getApolloServer(schema) {
     return new ApolloServer({ 
@@ -50,25 +52,45 @@ const start = async () => {
     const httpServer = http.createServer(app);
     server.installSubscriptionHandlers(httpServer);
 
-    const activateUpdateGatewayInterval = getENV("GRAPHQL_UPDATE_GATEWAY", "false") === "true";
-    const updateGatewayInterval = getENV("GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS", "60000");
-    if (activateUpdateGatewayInterval === true)
-    {
-        setInterval(async () => {
-            try {
-                const updatedSchema = await getRemoteSchemas(uris).catch((e) => {
-                    console.error(e);
-                });
-                if (updatedSchema) {
-                    schema = updatedSchema
-                    server = getApolloServer(schema);
-                    middleware = server.getMiddleware({});
-                }
-            } catch (error) {
-                console.error(error);
+    const updateSchema = async () => {
+        try {
+            const updatedSchema = await getRemoteSchemas(uris).catch((e) => {
+                console.error(e);
+            });
+            if (updatedSchema) {
+                const schemaDerivedData = await server.generateSchemaDerivedData(updatedSchema);
+                server.schema = updatedSchema;
+                server.schemaDerivedData = schemaDerivedData;
+                server.subscriptionServer.schema = updatedSchema;
             }
-        }, updateGatewayInterval);
+        } catch (error) {
+            console.error(error);
+        }
     }
+
+    const activateUpdateGatewayWithTimer: boolean = getENV("GRAPHQL_UPDATE_GATEWAY_WITH_TIMER", "false") === "true";
+    const updateGatewayInterval: number = parseInt(getENV("GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS", "60000"));
+    const timer = await updateSchemaWithTimer(
+        activateUpdateGatewayWithTimer, 
+        updateGatewayInterval, 
+        updateSchema);
+    
+    const activateUpdateGatewayWithMqtt: boolean = getENV("GRAPHQL_UPDATE_GATEWAY_WITH_MQTT", "false") === "true";
+    const mqttConnectionString: string = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_CONNECTION_STRING", "ws://rabbitmq:15675/ws");
+    const mqttSubscriptionTopic: string = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_SUBSCRIPTION_TOPIC", "graphql-gateway/update");
+    const mqttSubscriptionClientId: string = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_CLIENT_ID", "mqtt-graphql-gateway");
+    const mqttSubscriptionUsername: string | undefined = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME", undefined);
+    const mqttSubscriptionPassword: string | undefined = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD", undefined);
+    const mqttClient = await updateSchemaWithMqtt(
+        activateUpdateGatewayWithMqtt, 
+        mqttConnectionString, 
+        mqttSubscriptionTopic, 
+        mqttSubscriptionClientId, 
+        mqttSubscriptionUsername, 
+        mqttSubscriptionPassword, 
+        updateSchema);
+
+    filterConsole(['The addResolveFunctionsToSchema function takes named options now; see IAddResolveFunctionsToSchemaOptions']);
 
     httpServer.listen(PORT, () => {
         console.log(`🚀 Server ready at ${HOST}:${PORT}${server.graphqlPath}`)

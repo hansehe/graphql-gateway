@@ -1,0 +1,5 @@
+networks: 
+    backend_network: false
+
+stacks:
+    rabbitmq: docker-compose.rabbitmq.yml

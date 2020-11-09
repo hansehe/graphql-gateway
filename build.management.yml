@@ -30,5 +30,12 @@ publish:
             directory: helm
             cmd: 
                 - helm template graphql-gateway
-                - helm package graphql-gateway --destination charts --app-version ${VERSION}
+                - helm package graphql-gateway --destination charts
                 - helm repo index ./charts
+
+swarm:
+    selections:
+        prod:
+            directory: ServiceDependencies
+            files:
+                - swarm-management.yml

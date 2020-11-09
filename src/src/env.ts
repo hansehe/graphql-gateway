@@ -5,7 +5,7 @@ try {
 export const getENV = (name, defaultValue) => {
   const value = process.env[name] || defaultValue;
 
-  if (typeof value === 'undefined') {
+  if (typeof value === 'undefined' && typeof defaultValue !== 'undefined') {
     throw new Error(`Missing environment varialbe '${name}'`);
   }
 
