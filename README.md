@@ -18,9 +18,14 @@ Access graphql playground api at:
 
 ## Use Helm Repo
 ```bash
-helm repo add graphql-gateway 'https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/charts'
+helm repo add graphql-gateway https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/charts
 helm repo update
-helm repo list
+```
+```bash
+helm install graphql-gateway \
+--set environmentVariables.GRAPHQL_URL_0=http://service_1/graphql \
+--set environmentVariables.GRAPHQL_URL_1=http://service_2/graphql \
+graphql-gateway/graphql-gateway
 ```
 
 ## Development
