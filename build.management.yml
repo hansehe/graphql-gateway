@@ -4,8 +4,6 @@ env_files:
 run:
     selections:
         service:
-            # cmd:
-            #     - python DumpLocalhostIP.py
             files:
                 - docker-compose.yml
 

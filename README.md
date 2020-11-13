@@ -8,15 +8,11 @@ It is implemented with the graphql [federation specification](https://www.apollo
 Please also look at this graphql federation demo:
 - https://github.com/apollographql/federation-demo
 
-## Run With Docker Or Docker Compose
+## Run With Docker
 ```bash
-docker run --rm -p 8080:80 -e GRAPHQL_URL_0=https://api.graphloc.com/graphql hansehe/graphql-gateway
+docker run --rm -p 8181:80 -e GRAPHQL_URL_0=http://first-graphql-service/graphql GRAPHQL_URL_1=http://second-graphql-service/graphql hansehe/graphql-gateway
 ```
 
-```bash
-# Set GRAPHQL_URL_0 environment variable first..
-docker-compose -f docker-compose.yml up
-```
 Access graphql playground api at: 
 - http://localhost:8181/graphql/
 
@@ -25,4 +21,17 @@ Access graphql playground api at:
 helm repo add graphql-gateway 'https://raw.githubusercontent.com/hansehe/graphql-gateway/master/helm/charts'
 helm repo update
 helm repo list
+```
+
+## Development
+```bash
+# Prerequisites: docker/docker-compose/node/python
+# https://pypi.org/project/DockerBuildManagement/
+pip install --upgrade DockerBuildManagement
+dbm -swarm -start
+dbm -build -test -run service
+# Access graphql gateway (federated schemas of backend 0 and 1) api at: http://localhost:8181/graphql/
+# Access graphql backend 0 api at: http://localhost:5000/graphql/
+# Access graphql backend 1 api at: http://localhost:5001/graphql/
+dbm -swarm -stop
 ```

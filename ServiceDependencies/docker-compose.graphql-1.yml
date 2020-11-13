@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+    graphql-1:
+        image: hansehe/graphql-template:1.0.0
+        hostname: graphql-1
+        networks:
+            - backend_network
+        environment:
+            GRAPHQL_INCLUDE_RANDOM_SCHEMA: "true"
+        ports:
+            - 5001:80
+
+networks:
+  backend_network:
+    external: true

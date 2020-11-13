@@ -3,3 +3,5 @@ networks:
 
 stacks:
     rabbitmq: docker-compose.rabbitmq.yml
+    graphql-0: docker-compose.graphql-0.yml
+    graphql-1: docker-compose.graphql-1.yml
