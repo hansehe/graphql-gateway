@@ -6,7 +6,7 @@ export const getENV = (name, defaultValue) => {
   const value = process.env[name] || defaultValue;
 
   if (typeof value === 'undefined' && typeof defaultValue !== 'undefined') {
-    throw new Error(`Missing environment varialbe '${name}'`);
+    throw new Error(`Missing environment variable '${name}'`);
   }
 
   return value;
@@ -20,7 +20,8 @@ export const getENVArray = prefix => {
     result.push(value);
   }
 
-  for (let i = 0; i < 100; i++) {
+  const maxRemoteSchemas = parseInt(getENV("MAX_REMOTE_SCHEMAS", '100'))
+  for (let i = 0; i < maxRemoteSchemas; i++) {
     let indexKey = `${prefix}_${i}`;
     let value = getENV(indexKey, null);
     if (typeof value === 'string') {

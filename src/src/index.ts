@@ -40,7 +40,12 @@ const start = async () => {
     const app = express();
     let server = getApolloServer(schema);
 
-    let middleware = server.getMiddleware({});
+    let middleware = server.getMiddleware({
+        path: getENV("GRAPHQL_URL_PATH", '/graphql'),
+        bodyParserConfig: {
+            limit: getENV("BODY_PARSER_CONFIG_LIMIT", '100mb'),
+        }
+    });
 
     app.use((req, res, next) => {
         const pathname = url.parse(req.url).pathname;
