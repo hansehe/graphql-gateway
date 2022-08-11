@@ -9,7 +9,7 @@ services:
         environment:
             GRAPHQL_INCLUDE_RANDOM_SCHEMA: "false"
         ports:
-            - 5000:80
+            - 5001:80
 
 networks:
   backend_network:

@@ -1,0 +1,68 @@
+import os
+
+# Service details
+SERVICE_NAME = os.environ.get('SERVICE_NAME', 'PyTemplate')
+DEFAULT_SERVICE_USER = os.environ.get('DEFAULT_SERVICE_USER', SERVICE_NAME)
+DEFAULT_SERVICE_EMAIL = os.environ.get('DEFAULT_SERVICE_EMAIL', 'contact@neate.no',)
+VERSION = os.environ.get('VERSION', '1.0.0-beta')
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
+LOG_FORMAT = os.environ.get('LOG_FORMAT', f'[%(levelname)s] service={SERVICE_NAME} message=%(name)s - %(message)s')
+'''
+Log level options:
+- 'CRITICAL'
+- 'ERROR'
+- 'WARNING'
+- 'INFO'
+- 'DEBUG'
+- 'NOTSET'
+'''
+
+# Server settings
+SERVER_PORT = int(os.environ.get('SERVER_PORT', '5000'))
+SERVER_HOST = os.environ.get('SERVER_HOST', '0.0.0.0')
+
+# Auth settings
+AUTH_ALLOW_ALL = os.environ.get('AUTH_ALLOW_ALL', 'true').upper() == 'TRUE'
+AUTH_PROVIDER_HOST = os.environ.get('AUTH_PROVIDER_HOST', 'http://localhost:5000/graphql')
+
+# Gunicorn settings
+GUNICORN_WORKERS = int(os.environ.get('GUNICORN_WORKERS', '1'))
+GUNICORN_BACKLOG = int(os.environ.get('GUNICORN_BACKLOG', '2048'))
+GUNICORN_WORKER_CONNECTIONS = int(os.environ.get('GUNICORN_WORKER_CONNECTIONS', '1000'))
+GUNICORN_TIMEOUT = int(os.environ.get('GUNICORN_TIMEOUT', '30'))
+GUNICORN_KEEPALIVE = int(os.environ.get('GUNICORN_KEEPALIVE', '2'))
+
+# Graphql subscriptions
+GRAPHQL_SUBSCRIPTIONS_HOST_ADDRESS = os.environ.get('GRAPHQL_SUBSCRIPTIONS_HOST_ADDRESS', f'ws://localhost:{SERVER_PORT}')
+
+# Schemas
+GRAPHQL_INCLUDE_RANDOM_SCHEMA = os.environ.get('GRAPHQL_INCLUDE_RANDOM_SCHEMA', 'true').upper() == 'TRUE'
+
+# Topic Settings
+ROOT_TOPIC = os.environ.get('ROOT_TOPIC', 'neate')
+
+# RabbitMq Amqp Settings
+RABBITMQ_AMQP_USER = os.environ.get('RABBITMQ_AMQP_USER', 'amqp')
+RABBITMQ_AMQP_PASSWORD = os.environ.get('RABBITMQ_AMQP_PASSWORD', 'amqp')
+RABBITMQ_AMQP_HOSTNAME = os.environ.get('RABBITMQ_AMQP_HOSTNAME', 'localhost')
+RABBITMQ_AMQP_VIRTUAL_HOST = os.environ.get('RABBITMQ_AMQP_VIRTUAL_HOST', '/')
+RABBITMQ_AMQP_PORT = int(os.environ.get('RABBITMQ_AMQP_PORT', '5672'))
+RABBITMQ_AMQP_LISTENER_QUEUE = os.environ.get('RABBITMQ_AMQP_LISTENER_QUEUE', SERVICE_NAME)
+RABBITMQ_AMQP_CONSUMERS = int(os.environ.get('RABBITMQ_AMQP_CONSUMERS', '1'))
+RABBITMQ_AMQP_HEADER_PREFIX = os.environ.get('RABBITMQ_AMQP_HEADER_PREFIX', 'NEATE')
+RABBITMQ_AMQP_ASSERT_CONNECTED_TIMEOUT_SEC = int(os.environ.get('RABBITMQ_AMQP_ASSERT_CONNECTED_TIMEOUT_SEC', '30'))
+RABBITMQ_AMQP_UNRESPONSIVE_TIMEOUT = int(os.environ.get('RABBITMQ_AMQP_UNRESPONSIVE_TIMEOUT', '10'))
+RABBITMQ_AMQP_PREFETCH_COUNT = int(os.environ.get('RABBITMQ_AMQP_PREFETCH_COUNT', '20'))
+RABBITMQ_AMQP_PIKA_LOG_LEVEL = os.environ.get('RABBITMQ_AMQP_PIKA_LOG_LEVEL', 'WARNING')
+RABBITMQ_AMQP_ERROR_HANDLER_MAX_RETRIES = int(os.environ.get('RABBITMQ_AMQP_ERROR_HANDLER_MAX_RETRIES', '0'))
+RABBITMQ_AMQP_ERROR_HANDLER_DELAY = int(os.environ.get('RABBITMQ_AMQP_ERROR_HANDLER_DELAY', '1'))
+RABBITMQ_AMQP_ERROR_HANDLER_BACKOFF_DELAY = int(os.environ.get('RABBITMQ_AMQP_ERROR_HANDLER_BACKOFF_DELAY', '2'))
+
+# RabbitMq Mqtt Settings
+RABBITMQ_MQTT_USER = os.environ.get('RABBITMQ_MQTT_USER', 'amqp')
+RABBITMQ_MQTT_PASSWORD = os.environ.get('RABBITMQ_MQTT_PASSWORD', 'amqp')
+RABBITMQ_MQTT_HOSTNAME = os.environ.get('RABBITMQ_MQTT_HOSTNAME', 'localhost')
+RABBITMQ_MQTT_VIRTUAL_HOST = os.environ.get('RABBITMQ_MQTT_VIRTUAL_HOST', None)
+RABBITMQ_MQTT_PORT = int(os.environ.get('RABBITMQ_MQTT_PORT', '1883'))
+RABBITMQ_MQTT_KEEP_ALIVE_SEC = int(os.environ.get('RABBITMQ_MQTT_KEEP_ALIVE_SEC', '3'))
+RABBITMQ_MQTT_ASSERT_CONNECTED_TIMEOUT_SEC = int(os.environ.get('RABBITMQ_MQTT_ASSERT_CONNECTED_TIMEOUT_SEC', '30'))

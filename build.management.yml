@@ -3,12 +3,21 @@ env_files:
 
 run:
     selections:
+        graphqlTemplate:
+            directory: GraphqlTemplate
+            files:
+                - docker-compose.yml
         service:
             files:
                 - docker-compose.yml
 
 build:
     selections:
+        graphqlTemplate:
+            additionalTag: latest
+            directory: GraphqlTemplate
+            files:
+                - docker-compose.yml
         service:
             additionalTag: latest
             files:
@@ -20,6 +29,11 @@ build:
 
 publish:
     selections:
+        graphqlTemplate:
+            additionalTag: latest
+            directory: GraphqlTemplate
+            files:
+                - docker-compose.yml
         service:
             additionalTag: latest
             files:

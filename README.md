@@ -36,7 +36,7 @@ pip install --upgrade DockerBuildManagement
 dbm -swarm -start
 dbm -build -test -run service
 # Access graphql gateway (federated schemas of backend 0 and 1) api at: http://localhost:8181/graphql/
-# Access graphql backend 0 api at: http://localhost:5000/graphql/
-# Access graphql backend 1 api at: http://localhost:5001/graphql/
+# Access graphql backend 0 api at: http://localhost:5001/graphql/
+# Access graphql backend 1 api at: http://localhost:5002/graphql/
 dbm -swarm -stop
 ```
