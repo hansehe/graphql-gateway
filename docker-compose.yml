@@ -17,8 +17,9 @@ services:
       - GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD=amqp
       # - GRAPHQL_URL_0=http://${GRAPHQL_URL_0:-graphql-0}/graphql
       # - GRAPHQL_URL_1=http://${GRAPHQL_URL_1:-graphql-1}/graphql
-      - GRAPHQL_URL_0=http://host.docker.internal:8000/graphql
-      - GRAPHQL_URL_1=http://host.docker.internal:8001/graphql
+      # - GRAPHQL_URL_0=http://host.docker.internal:8000/graphql
+      # - GRAPHQL_URL_1=http://host.docker.internal:8001/graphql
+      - GRAPHQL_URL_0=http://host.docker.internal:8002/graphql
 
 networks:
   backend_network:

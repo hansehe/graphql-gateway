@@ -1,8 +1,8 @@
 from typing import Dict
 
 import graphene
-from graphene_federation import build_schema
-from graphql.utils import schema_printer
+from graphene_federation3 import build_schema
+# from graphql.utils import schema_printer
 
 from PyTemplate import config
 from PyTemplate.graphql.queries.MqttCredentials import MqttCredentials, GetMqttCredentialsProps
@@ -30,17 +30,17 @@ class Mutation(graphene.ObjectType):
 class Subscription(graphene.ObjectType):
     mqtt_subscription = graphene.List(MqttSubscription, **GetMqttSubscriptionProps())
 
-    def resolve_mqtt_subscription(self, info, **kwargs):
+    async def subscribe_mqtt_subscription(self, info, **kwargs):
         return MqttSubscription.resolve(info, **kwargs)
 
 
 Schema = build_schema(query=Query, mutation=Mutation, subscription=Subscription)
 
 
-def GetSchemaSdl(schema: graphene.Schema = Schema):
-    schemaSdl = schema_printer.print_schema(schema)
-    return schemaSdl
+# def GetSchemaSdl(schema: graphene.Schema = Schema):
+#     schemaSdl = schema_printer.print_schema(schema)
+#     return schemaSdl
 
 
-def GetSchemaIntrospection(schema: graphene.Schema = Schema):
-    return schema.introspect()
+# def GetSchemaIntrospection(schema: graphene.Schema = Schema):
+#     return schema.introspect()

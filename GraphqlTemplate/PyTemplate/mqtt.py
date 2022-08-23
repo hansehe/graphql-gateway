@@ -3,7 +3,7 @@ import logging
 import uuid
 import time
 from typing import Dict, List, Tuple
-from rx.subjects import Subject
+from reactivex.subject import Subject
 
 import paho.mqtt.client as mqtt
 

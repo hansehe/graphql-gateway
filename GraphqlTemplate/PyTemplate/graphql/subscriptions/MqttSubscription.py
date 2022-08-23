@@ -1,14 +1,15 @@
+import asyncio
 import logging
 from typing import Dict, List
-from rx.subjects import Subject
+from reactivex.subject import Subject
 
 import graphene
-from graphene_plugin import patch_object_type
+# from graphene_plugin import patch_object_type
 
 from PyTemplate.graphql import AuthResolver
 from PyTemplate import mqtt
 
-patch_object_type()
+# patch_object_type()
 log = logging.getLogger(__name__)
 MQTT_SUBSCRIPTION_SUBJECT = Subject()
 
@@ -25,10 +26,23 @@ class MqttSubscription(graphene.ObjectType):
     payload = graphene.String(description="payload.")
 
     @staticmethod
-    def resolve(info, **kwargs):
+    async def resolve(info, **kwargs):
         user = AuthResolver.AssertAuth(info, token=kwargs.get('authorization', None))
+        queue = asyncio.Queue()
 
-        def OnMqttUpdate(**kwargs):
-            return [kwargs]
+        def on_next(value: dict):
+            queue.put_nowait([value])
 
-        return mqtt.MQTT_MESSAGE_SUBJECT.map(lambda x: OnMqttUpdate(**x))
+        disposable = mqtt.MQTT_MESSAGE_SUBJECT.subscribe(
+            on_next=on_next,
+        )
+
+        try:
+            while True:
+                payload = queue.get()
+                if payload is not None:
+                    log.info("sending payload")
+                    yield payload
+        finally:
+            disposable.dispose()
+

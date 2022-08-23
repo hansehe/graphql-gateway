@@ -2,12 +2,12 @@ from typing import Dict
 import logging
 
 import graphene
-from graphene_plugin import patch_object_type
+# from graphene_plugin import patch_object_type
 
 from PyTemplate.graphql import AuthResolver
 from PyTemplate.models.MqttCredentialsModel import MqttCredentialsModel
 
-patch_object_type()
+# patch_object_type()
 log = logging.getLogger(__name__)
 
 
@@ -17,7 +17,7 @@ def GetMqttCredentialsProps() -> Dict[str, graphene.Scalar]:
     }
 
 
-class MqttCredentials(graphene.ObjectType[MqttCredentialsModel]):
+class MqttCredentials(graphene.ObjectType):
     username = graphene.String(description="Mqtt username output variable.")
     password = graphene.String(description="Mqtt password output variable.")
     virtualHost = graphene.String(description="RabbitMq virtual host output variable.")

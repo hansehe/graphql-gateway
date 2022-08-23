@@ -1,12 +1,12 @@
 from __future__ import annotations
 import random
 import graphene
-from graphene_plugin import patch_object_type
+# from graphene_plugin import patch_object_type
 
 from PyTemplate import mqtt
 from PyTemplate.graphql import AuthResolver
 
-patch_object_type()
+# patch_object_type()
 
 
 class MutateMqtt(graphene.Mutation):
