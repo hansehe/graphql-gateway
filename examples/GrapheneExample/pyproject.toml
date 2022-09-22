@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "graphenetest"
+version = "1.0.0"
+description = ""
+authors = ["Hans Erik Heggem <hanserik@neate.no>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<=3.11"
+fastapi = "^0.85.0"
+uvicorn = {extras = ["standard"], version = "^0.18.3"}
+graphene = "^3.1.1"
+starlette-graphene3 = "^0.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

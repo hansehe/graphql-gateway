@@ -15,6 +15,7 @@ __pycache__/
 .vscode/
 .idea/
 venv/
+.venv/
 output/
 ~$*
 debug.log
