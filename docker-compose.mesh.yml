@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  mesh-all:
+    image: hiroyukiosaki/graphql-mesh:latest-all-alpine
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./work/.meshrc.yaml:/work/.meshrc.yaml

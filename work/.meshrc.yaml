@@ -1,0 +1,68 @@
+# sources:
+#   - name: Wiki
+#     handler:
+#       openapi:
+#         source: https://api.apis.guru/v2/specs/wikimedia.org/1.0.0/swagger.yaml
+
+sources:
+  - name: Wiki
+    handler:
+      openapi:
+        source: https://api.apis.guru/v2/specs/wikimedia.org/1.0.0/swagger.yaml
+  # - name: Covid
+  #   handler:
+  #     graphql:
+  #       endpoint: https://covid-19-two-rust.vercel.app/api/graphql
+  # - name: localstuff_strawberry
+  #   handler:
+  #     graphql:
+  #       endpoint: http://host.docker.internal:8003/graphql
+  # - name: localstuff_graphene
+  #   handler:
+  #     graphql:
+  #       endpoint: http://host.docker.internal:8002/graphql
+  # - name: localstuff_graphene_1
+  #   handler:
+  #     graphql:
+  #       endpoint: http://host.docker.internal:5001/graphql
+  # - name: localstuff_graphene_2
+  #   handler:
+  #     graphql:
+  #       endpoint: http://host.docker.internal:5002/graphql
+  - name: auth-provider
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:5001/graphql
+        operationHeaders:
+          authorization: "{context.headers['authorization']}"
+          tenant: "{context.headers['tenant']}"
+  - name: template-engine
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:5003/graphql
+        operationHeaders:
+          authorization: "{context.headers['authorization']}"
+          tenant: "{context.headers['tenant']}"
+  - name: country-info
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:5004/graphql
+        operationHeaders:
+          authorization: "{context.headers['authorization']}"
+          tenant: "{context.headers['tenant']}"
+  - name: file-store
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:5007/graphql
+        operationHeaders:
+          authorization: "{context.headers['authorization']}"
+          tenant: "{context.headers['tenant']}"
+  - name: document-store
+    handler:
+      graphql:
+        endpoint: http://host.docker.internal:5000/graphql
+        operationHeaders:
+          authorization: "{context.headers['authorization']}"
+          tenant: "{context.headers['tenant']}"
+serve:
+  hostname: 0.0.0.0 

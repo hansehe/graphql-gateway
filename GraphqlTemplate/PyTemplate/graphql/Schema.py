@@ -1,7 +1,7 @@
 from typing import Dict
 
 import graphene
-from graphene_federation3 import build_schema
+from graphene_federation import build_schema
 # from graphql.utils import schema_printer
 
 from PyTemplate import config

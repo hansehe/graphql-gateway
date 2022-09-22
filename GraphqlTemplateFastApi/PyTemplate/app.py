@@ -86,6 +86,6 @@ def Run(runFlask: bool = True) -> None:
     log.info(f">>>>> Starting graphql server at http://{config.SERVER_HOST}:{config.SERVER_PORT}/graphql <<<<<")
     if runFlask:
         Init()
-        uvicorn.run(app, host="0.0.0.0", port=8001)
+        uvicorn.run(app, host="0.0.0.0", port=8003)
     return app
 

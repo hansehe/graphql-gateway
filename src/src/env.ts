@@ -1,6 +1,6 @@
 try {
   require('dotenv').config();
-} catch (err) {}
+} catch (err) { }
 
 export const getENV = (name, defaultValue) => {
   const value = process.env[name] || defaultValue;
@@ -13,7 +13,11 @@ export const getENV = (name, defaultValue) => {
 };
 
 export const getENVArray = prefix => {
-  let result = [];
+  let result = [
+    'http://localhost:5000/graphql',
+    'http://localhost:8003/graphql'
+  ];
+  return result;
 
   let value = getENV(prefix, null);
   if (typeof value === 'string') {

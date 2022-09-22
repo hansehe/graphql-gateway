@@ -29,6 +29,7 @@ class MqttSubscription(graphene.ObjectType):
     async def resolve(info, **kwargs):
         user = AuthResolver.AssertAuth(info, token=kwargs.get('authorization', None))
         queue = asyncio.Queue()
+        log.info("connecting subcription")
 
         def on_next(value: dict):
             queue.put_nowait([value])
