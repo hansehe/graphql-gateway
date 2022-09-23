@@ -48,6 +48,6 @@ publish:
 swarm:
     selections:
         prod:
-            directory: ServiceDependencies
+            directory: services
             files:
                 - swarm-management.yml
