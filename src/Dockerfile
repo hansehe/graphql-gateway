@@ -1,11 +1,11 @@
-FROM node:8.9.0-alpine
+FROM node:20.8.0-alpine
 
 WORKDIR /app
 
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
-RUN npm install
+RUN npm ci --omit=dev --legacy-peer-deps
 RUN apk --no-cache add curl
 
 COPY . .

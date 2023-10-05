@@ -21,8 +21,8 @@ export const httpUriToWsUri = (uri: string): string => {
   }
 
 
-export const getRemoteSchema =  async (uri: String, websocketUri: String): Promise<GraphQLSchema> => {
-    const httpLink = new HttpLink({ uri, fetch });
+export const getRemoteSchema =  async (uri: string, websocketUri: string): Promise<GraphQLSchema> => {
+    const httpLink = new HttpLink({ uri, fetch: fetch as any });
     const wsLink = new SubscriptionClient(websocketUri, {
         reconnect: true
     }, ws);
@@ -42,7 +42,7 @@ export const getRemoteSchema =  async (uri: String, websocketUri: String): Promi
 
     const link = split(
         ({query}) => {
-            const {kind, operation} = getMainDefinition(query);
+            const {kind, operation} = getMainDefinition(query) as any;
             return kind === 'OperationDefinition' && operation === 'subscription'
         },
         wsLink,
