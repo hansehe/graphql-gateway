@@ -1,0 +1,20 @@
+{
+  "name": "wundergraph-simple",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "wunderctl start --debug",
+    "dev": "wunderctl up --debug",
+    "generate": "wunderctl generate --debug",
+    "check": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wundergraph/sdk": "^0.158.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.14",
+    "typescript": "^4.9.5"
+  }
+}
