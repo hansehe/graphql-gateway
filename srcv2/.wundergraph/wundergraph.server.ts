@@ -5,11 +5,6 @@ import type { InternalClient } from './generated/wundergraph.internal.client';
 export default configureWunderGraphServer<HooksConfig, InternalClient>(() => ({
 	hooks: {
 		queries: {
-			Dragons: {
-				postResolve: async (hook) => {
-					hook.log.info('postResolve hook for Dragons');
-				}
-			}
 		},
 		mutations: {},
 	},
