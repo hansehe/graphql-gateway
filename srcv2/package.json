@@ -9,7 +9,7 @@
     "check": "tsc"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@wundergraph/sdk": "^0.158.1"
   },
