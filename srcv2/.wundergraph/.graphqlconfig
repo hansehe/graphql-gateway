@@ -3,11 +3,7 @@
     "schemaPath": "generated/wundergraph.schema.graphql",
     "extensions": {
       "endpoint": {
-        "introspect": false,
-        "url": "http://localhost:9991/graphql",
-        "headers": {
-          "user-agent": "WunderGraph Client"
-        }
+        "introspect": false
       }
     }
   }
