@@ -16,20 +16,12 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 environmentVariables: {}
-  # HOST: http://graphql.localhost
-  # GRAPHQL_UPDATE_GATEWAY_WITH_TIMER: true
-  # GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS: 60000
-  # GRAPHQL_UPDATE_GATEWAY_WITH_MQTT: true
-  # GRAPHQL_UPDATE_GATEWAY_MQTT_CONNECTION_STRING: ws://rabbitmq:15675/ws
-  # GRAPHQL_UPDATE_GATEWAY_MQTT_SUBSCRIPTION_TOPIC: graphql-gateway/update
-  # GRAPHQL_UPDATE_GATEWAY_MQTT_CLIENT_ID: mqtt-graphql-gateway
-  # GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME: mqtt
-  # GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD: mqtt
-  # GRAPHQL_UPDATE_GATEWAY_USE_BACKOFF_POLICY: true
-  # GRAPHQL_UPDATE_GATEWAY_BACKOFF_POLICY_MAX_DELAY_MS: 100000
-  # GRAPHQL_UPDATE_GATEWAY_BACKOFF_POLICY_NUM_OF_ATTEMPTS: 10
+  # WG_PUBLIC_NODE_URL: http://graphql.localhost
+  # GRAPHQL_URL_POLLING_INTERVAL_SECONDS: 10
   # GRAPHQL_URL_0: http://service_1/graphql
   # GRAPHQL_URL_1: http://service_2/graphql
+  # GRAPHQL_URL_NAMESPACE_0: service_1
+  # GRAPHQL_URL_NAMESPACE_1: service_2
 
 serviceAccount:
   # Specifies whether a service account should be created

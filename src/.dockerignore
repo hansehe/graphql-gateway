@@ -1,4 +1,9 @@
-.env
+.dockerignore
 node_modules
-
-links.graphql
+npm-debug.log
+Dockerfile
+.git
+.gitignore
+.github
+minio
+generated

@@ -10,7 +10,7 @@ run:
 build:
     selections:
         service:
-            additionalTag: latest
+            additionalTag: latest-beta
             files:
                 - docker-compose.yml
         helm:
@@ -21,7 +21,7 @@ build:
 publish:
     selections:
         service:
-            additionalTag: latest
+            additionalTag: latest-beta
             platforms:
                 - linux/amd64
                 - linux/arm64

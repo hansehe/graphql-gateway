@@ -24,4 +24,4 @@ docker-compose.build.*.yml
 docker-compose.run.*.yml
 docker-compose.test.*.yml
 docker-compose.publish.*.yml
-.env
+private.env

@@ -1,18 +1,16 @@
-FROM node:20.8.0-alpine
+FROM docker.io/node:18-alpine
+ARG wg_public_node_url
 
 WORKDIR /app
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
+COPY package.json package-lock.json /app/
+ENV CI=true WG_COPY_BIN_PATH=/usr/bin/wunderctl
+RUN npm ci --prefer-offline --no-audit
+COPY .wundergraph ./.wundergraph
 
-RUN npm ci --omit=dev --legacy-peer-deps
-RUN apk --no-cache add curl
+EXPOSE 80
+ENV WG_NODE_URL=http://127.0.0.1:80 WG_NODE_INTERNAL_URL=http://127.0.0.1:9993 WG_NODE_HOST=0.0.0.0 WG_NODE_PORT=80 WG_NODE_INTERNAL_PORT=9993 WG_SERVER_URL=http://127.0.0.1:9992 WG_SERVER_HOST=127.0.0.1 WG_SERVER_PORT=9992
 
-COPY . .
-
-ENV PORT=80
-
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=10s CMD curl --fail http://localhost:80/status/health || exit 1
-
-ENTRYPOINT [ "npm" ]
-CMD [ "start" ] 
+ENV WG_PUBLIC_NODE_URL=${wg_public_node_url}
+ENTRYPOINT wunderctl up --wundergraph-dir=.wundergraph
+# ENTRYPOINT wunderctl generate --wundergraph-dir=.wundergraph && wunderctl start --wundergraph-dir=.wundergraph

@@ -2,26 +2,19 @@ version: '3.3'
 
 services:
   graphql-gateway:
-    # image: hansehe/graphql-gateway:${VERSION:-latest}
-    image: graphql-gateway-wip:${VERSION:-latest}
+    image: hansehe/graphql-gateway:${VERSION:-latest}
     networks:
       - backend_network
     build:
-      context: ./srcv2
+      context: ./src
       dockerfile: Dockerfile
       args:
         - wg_public_node_url=http://localhost:8181
     ports:
       - 8181:80
     environment:
-      - GRAPHQL_UPDATE_GATEWAY_WITH_TIMER=false
-      - GRAPHQL_UPDATE_GATEWAY_WITH_MQTT=true
-      - GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME=amqp
-      - GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD=amqp
       - GRAPHQL_URL_0=http://host.docker.internal:5001/graphql
       - GRAPHQL_URL_1=http://host.docker.internal:5002/graphql
-      # - GRAPHQL_URL_0=http://host.docker.internal:8001/graphql
-      # - GRAPHQL_URL_1=http://host.docker.internal:8002/graphql
 
 networks:
   backend_network:
