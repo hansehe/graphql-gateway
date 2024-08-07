@@ -40,3 +40,5 @@ dbm -build -test -run service
 # Access graphql backend 1 api at: http://localhost:5002/graphql/
 dbm -swarm -stop
 ```
+
+https://the-guild.dev/graphql/mesh/docs/handlers/graphql
