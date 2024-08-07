@@ -12,7 +12,7 @@ import { AsyncApiIntrospector } from "@wundergraph/sdk/dist/configure";
 
 
 const graphqlUris = getENVArray("GRAPHQL_URL");
-const defaultGraphqlPollingIntervalSeconds = getenv.int("GRAPHQL_URL_POLLING_INTERVAL_SECONDS", 60);
+const defaultGraphqlPollingIntervalSeconds = getenv.int("GRAPHQL_URL_POLLING_INTERVAL_SECONDS", 5);
 const graphqlServices: AsyncApiIntrospector<any>[] = [];
 graphqlUris.forEach((graphqlUri, index) => {
   const graphqlService = introspect.graphql({
