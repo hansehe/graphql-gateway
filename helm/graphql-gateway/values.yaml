@@ -11,7 +11,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-healthCheckUrl: /status/health
+healthCheckUrl: /health
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -22,6 +22,8 @@ environmentVariables: {}
   # GRAPHQL_URL_1: http://service_2/graphql
   # GRAPHQL_URL_NAMESPACE_0: service_1
   # GRAPHQL_URL_NAMESPACE_1: service_2
+  # GRAPHQL_REQUEST_HEADER_0: Authorization
+  # GRAPHQL_REQUEST_HEADER_1: Tenant
 
 serviceAccount:
   # Specifies whether a service account should be created

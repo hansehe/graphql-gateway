@@ -9,7 +9,16 @@ import server from "./wundergraph.server";
 import operations from "./wundergraph.operations";
 import getenv from "getenv";
 import { AsyncApiIntrospector } from "@wundergraph/sdk/dist/configure";
+import { IHeadersBuilder } from "@wundergraph/sdk/dist/definition/headers-builder";
 
+const graphqlRequestHeaders = getENVArray("GRAPHQL_REQUEST_HEADER");
+
+const buildHeaders = (builder: IHeadersBuilder): IHeadersBuilder => {
+  for (let i = 0; i < graphqlRequestHeaders.length; i++) {
+    builder = builder.addClientRequestHeader(graphqlRequestHeaders[i], graphqlRequestHeaders[i]);
+  }
+  return builder;
+}
 
 const graphqlUris = getENVArray("GRAPHQL_URL");
 const defaultGraphqlPollingIntervalSeconds = getenv.int("GRAPHQL_URL_POLLING_INTERVAL_SECONDS", 5);
@@ -21,6 +30,7 @@ graphqlUris.forEach((graphqlUri, index) => {
     introspection: {
       pollingIntervalSeconds: getenv.int(`GRAPHQL_URL_POLLING_INTERVAL_SECONDS_${index}`, defaultGraphqlPollingIntervalSeconds),
     },
+    headers: buildHeaders,
   });
   graphqlServices.push(graphqlService);
 });
@@ -40,5 +50,6 @@ configureWunderGraphApplication({
     logger: {
       level: new EnvironmentVariable<LoggerLevel>('WG_LOG_LEVEL', 'info'),
     },
+    defaultRequestTimeoutSeconds: getenv.int('WG_DEFAULT_REQUEST_TIMEOUT_SECONDS', 60),
   },
 });
