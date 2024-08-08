@@ -3,6 +3,7 @@ const url = require('url');
 const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const filterConsole = require('filter-console');
+const { ruruHTML } = require("ruru/server")
 
 import { backOff, IBackOffOptions } from "exponential-backoff";
 import { GraphQLSchema } from "graphql";
@@ -11,8 +12,10 @@ import { getENV, getENVArray } from "./env";
 import { updateSchemaWithMqtt, updateSchemaWithTimer } from "./update-schema";
 
 function getApolloServer(schema) {
-    return new ApolloServer({ 
+    return new ApolloServer({
         schema: schema,
+        introspection: true,
+        playground: true,
         context: async ({ req, connection }) => {
             if (connection) {
                 return connection.context;
@@ -21,7 +24,7 @@ function getApolloServer(schema) {
                     req
                 };
             }
-        } 
+        }
     })
 }
 
@@ -40,17 +43,23 @@ const start = async () => {
     const app = express();
     let server = getApolloServer(schema);
 
+    const graphqlPath = getENV("GRAPHQL_URL_PATH", '/graphql');
     let middleware = server.getMiddleware({
-        path: getENV("GRAPHQL_URL_PATH", '/graphql'),
+        path: graphqlPath,
         bodyParserConfig: {
             limit: getENV("BODY_PARSER_CONFIG_LIMIT", '100mb'),
         }
     });
 
+    // app.get("/graphql", (_req, res) => {
+    //     res.type("html")
+    //     res.end(ruruHTML({ endpoint: graphqlPath, subscriptions: true }))
+    // })
+
     app.use((req, res, next) => {
         const pathname = url.parse(req.url).pathname;
         if (pathname === '/status/health') {
-            res.end(JSON.stringify({healthy: true}))
+            res.end(JSON.stringify({ healthy: true }))
             return
         }
         middleware(req, res, next);
@@ -100,10 +109,10 @@ const start = async () => {
     const activateUpdateGatewayWithTimer: boolean = getENV("GRAPHQL_UPDATE_GATEWAY_WITH_TIMER", "false") === "true";
     const updateGatewayInterval: number = parseInt(getENV("GRAPHQL_UPDATE_GATEWAY_INTERVAL_MS", "60000"));
     const timer = await updateSchemaWithTimer(
-        activateUpdateGatewayWithTimer, 
-        updateGatewayInterval, 
+        activateUpdateGatewayWithTimer,
+        updateGatewayInterval,
         updateSchema);
-    
+
     const activateUpdateGatewayWithMqtt: boolean = getENV("GRAPHQL_UPDATE_GATEWAY_WITH_MQTT", "false") === "true";
     const mqttConnectionString: string = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_CONNECTION_STRING", "ws://rabbitmq:15675/ws");
     const mqttSubscriptionTopic: string = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_SUBSCRIPTION_TOPIC", "graphql-gateway/update");
@@ -111,12 +120,12 @@ const start = async () => {
     const mqttSubscriptionUsername: string | undefined = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_USERNAME", undefined);
     const mqttSubscriptionPassword: string | undefined = getENV("GRAPHQL_UPDATE_GATEWAY_MQTT_PASSWORD", undefined);
     const mqttClient = await updateSchemaWithMqtt(
-        activateUpdateGatewayWithMqtt, 
-        mqttConnectionString, 
-        mqttSubscriptionTopic, 
-        mqttSubscriptionClientId, 
-        mqttSubscriptionUsername, 
-        mqttSubscriptionPassword, 
+        activateUpdateGatewayWithMqtt,
+        mqttConnectionString,
+        mqttSubscriptionTopic,
+        mqttSubscriptionClientId,
+        mqttSubscriptionUsername,
+        mqttSubscriptionPassword,
         updateSchema);
 
     filterConsole(['The addResolveFunctionsToSchema function takes named options now; see IAddResolveFunctionsToSchemaOptions']);

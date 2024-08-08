@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
-RUN npm ci --omit=dev --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 RUN apk --no-cache add curl
 
 COPY . .
