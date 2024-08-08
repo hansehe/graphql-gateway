@@ -4,30 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "mesh build --dir ./src subscriptionsProtocol=LEGACY_WS",
+    "dev": "mesh dev --dir ./src --port 8181 subscriptionsProtocol=LEGACY_WS"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "apollo-link": "^1.2.14",
-    "apollo-link-context": "^1.0.20",
-    "apollo-link-http": "^1.5.17",
-    "apollo-server": "^2.18.2",
-    "apollo-server-express": "^2.18.2",
-    "body-parser": "^1.19.0",
-    "exponential-backoff": "^3.1.0",
-    "express": "^4.17.1",
-    "filter-console": "^0.1.1",
-    "graphql-tools": "^2.24.0",
-    "graphql-yoga": "^1.4.3",
+    "@apollo/server": "^4.10.5",
+    "@graphql-mesh/cli": "^0.93.0",
+    "@graphql-mesh/compose-cli": "^0.7.0",
+    "@graphql-mesh/graphql": "^0.100.0",
+    "@graphql-mesh/serve-runtime": "^0.6.0",
+    "@graphql-tools/executor-graphql-ws": "^1.2.0",
+    "@graphql-tools/executor-http": "^1.1.5",
+    "@graphql-tools/stitch": "^9.2.10",
+    "@graphql-tools/stitching-directives": "^3.1.2",
+    "@graphql-tools/wrap": "^10.0.5",
+    "dotenv": "^16.4.5",
+    "exponential-backoff": "^3.1.1",
+    "express": "^4.19.2",
+    "filter-console": "^1.0.0",
+    "graphql": "^16.9.0",
+    "graphql-ws": "^5.16.0",
+    "graphql-yoga": "^5.6.3",
     "mqtt": "^4.2.4",
-    "node-fetch": "^2.6.1",
-    "subscriptions-transport-ws": "^0.9.6",
-    "ws": "^4.1.0",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.2",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
-    "npm-run-all": "4.1.2",
-    "typescript": "2.7.2"
+    "@types/express": "^4.17.21",
+    "typescript": "^5.5.4"
   }
 }

@@ -11,9 +11,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@graphql-mesh/cli": "^0.92.10",
     "@wundergraph/sdk": "0.184.2",
     "dotenv": "16.4.5",
-    "getenv": "1.0.0"
+    "getenv": "1.0.0",
+    "graphql": "^16.9.0"
   },
   "devDependencies": {
     "@types/getenv": "1.0.3",

@@ -6,7 +6,7 @@ services:
     networks:
       - backend_network
     build:
-      context: ./src
+      context: ./src-legacy
       dockerfile: Dockerfile
       args:
         - wg_public_node_url=http://localhost:8181

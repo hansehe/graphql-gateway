@@ -1,6 +1,4 @@
-try {
-  require('dotenv').config();
-} catch (err) {}
+require('dotenv').config({ path: ['private.env', '.env'] })
 
 export const getENV = (name, defaultValue) => {
   const value = process.env[name] || defaultValue;
