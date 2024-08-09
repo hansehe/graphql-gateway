@@ -7,6 +7,8 @@ const hostname = '127.0.0.1';
 const port = 1337;
 const proxyPort = 8181;
 
+// run with: node server.js
+
 // Create a proxy server
 const proxy = httpProxy.createProxyServer({});
 
