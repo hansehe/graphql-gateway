@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Client, createClient, RequestParams } from "graphql-sse";
 import './App.css'
 
+// https://the-guild.dev/graphql/sse/recipes
 export function toObservable(operation: RequestParams, client: Client) {
   return new Observable((observer) =>
     client.subscribe(operation, {
@@ -45,14 +46,13 @@ function App() {
     }
     const observable = toObservable({
       query: `
-  subscription dataSubscription($authorization: String, $tenantId: String) {
-    subscriptionDataSubscription(authorization: $authorization, tenantId: $tenantId) {
-      documentIds
+  subscription {
+    mqttSubscription {
+      payload
     }
   }
 `, variables: {
-  authorization: "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJBZmtmcXRmOWs1eGw5ZWNGTXFPMkVHOTAzWGdWY3RNZlVoY3hGWnpYSU9JIn0.eyJleHAiOjE3MjMxOTYzMTYsImlhdCI6MTcyMzE2MzkxNiwianRpIjoiYjQ1OTBiOGMtZTA1Zi00MDEyLTlkODEtODU2ZjgzOTQ3OTYyIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvYXV0aC9yZWFsbXMvdGVuYW50LWFpbXotYWlteiIsImF1ZCI6WyJhaW16LWFpbXotY2xpZW50IiwiYWNjb3VudCJdLCJzdWIiOiJmNTE1NjJmMS03MjY5LTRhODUtYmMxMy02MzNjODg5YjMzM2YiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJuZWF0ZS1hdXRoLXByb3ZpZGVyIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJyZWFsbS1jbGllbnQtYWRtaW4iLCJvZmZsaW5lX2FjY2VzcyIsInRlbmFudC1haW16LWFpbXoiLCJkZWZhdWx0LXJvbGVzLXRlbmFudC1haW16LWFpbXoiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFpbXotYWltei1jbGllbnQiOnsicm9sZXMiOlsib3duZXIiLCJyZWFkZXIiLCJhZG1pbiIsIndyaXRlciJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTAuMC4yOS4zNyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1uZWF0ZS1hdXRoLXByb3ZpZGVyIiwiY2xpZW50QWRkcmVzcyI6IjEwLjAuMjkuMzciLCJjbGllbnRfaWQiOiJuZWF0ZS1hdXRoLXByb3ZpZGVyIn0.ZStUMEF-1x3RzFVSyoNyJb5RpWAbwAY7qSNppcY4zLUElTOoXQ5CFJPcmGrxGdwj8BzwjUtUfvX0mNVsbZS6thDZS6kbFmdVa_NKYjDSstF0iKjSeukl660BNCkt0QHlq-ytVEbRBUBHLVn0dhVMHaKa7m03TqtkrtswcLtBFcdqJuoc8LtpgBs_af-1RKU-kczvyZV5e0FuBd6STeUNj5RhuQZZRYJFDCL5FSDfu-qgkWwJtE1oGknKPFFml0DhAojUCPhnFWZXMSAGOXEeLWS8e69wQcQd1-BLQjZzo8ONAKJL-gs02e2pxyGppvqcBdpOU7_Xz0WgCMyX5HjkHA",
-  tenantId: "aimz"
+  tenantId: "test"
 }
     }, client.current);
 

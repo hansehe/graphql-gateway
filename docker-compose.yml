@@ -13,21 +13,21 @@ services:
     ports:
       - 8181:80
     environment:
-      # - GRAPHQL_URL_0=http://host.docker.internal:5001/graphql
-      # - GRAPHQL_URL_1=http://host.docker.internal:5002/graphql
-      # - GRAPHQL_REQUEST_HEADER_0=Authorization
-      # - GRAPHQL_REQUEST_HEADER_1=Tenant
-      - GRAPHQL_URL_0=http://${AUTH_PROVIDER_HOSTNAME:-host.docker.internal:5001}/graphql
-      - GRAPHQL_URL_1=http://${TEMPLATE_ENGINE_HOSTNAME:-host.docker.internal:5003}/graphql
-      - GRAPHQL_URL_2=http://${GENERAL_INTEGRATIONS:-host.docker.internal:5004}/graphql
-      - GRAPHQL_URL_3=http://${FILE_STORE_HOSTNAME:-host.docker.internal:5007}/graphql
-      - GRAPHQL_URL_4=http://${NOTIFICATION_HOSTNAME:-host.docker.internal:5012}/graphql
-      - GRAPHQL_URL_5=http://${CHATBOT_HOSTNAME:-host.docker.internal:5016}/graphql
-      - GRAPHQL_URL_6=http://${AIMZ_GENERAL_INTEGRATIONS_HOSTNAME:-host.docker.internal:5009}/graphql
-      - GRAPHQL_URL_7=http://${AIMZ_DOCUMENT_STORE_HOSTNAME:-host.docker.internal:5000}/graphql
+      - GRAPHQL_URL_0=http://host.docker.internal:5001/graphql
+      - GRAPHQL_URL_1=http://host.docker.internal:5002/graphql
       - GRAPHQL_REQUEST_HEADER_0=Authorization
       - GRAPHQL_REQUEST_HEADER_1=Tenant
-      - GRAPHQL_REQUEST_HEADER_2=TenantToken
+      # - GRAPHQL_URL_0=http://${AUTH_PROVIDER_HOSTNAME:-host.docker.internal:5001}/graphql
+      # - GRAPHQL_URL_1=http://${TEMPLATE_ENGINE_HOSTNAME:-host.docker.internal:5003}/graphql
+      # - GRAPHQL_URL_2=http://${GENERAL_INTEGRATIONS:-host.docker.internal:5004}/graphql
+      # - GRAPHQL_URL_3=http://${FILE_STORE_HOSTNAME:-host.docker.internal:5007}/graphql
+      # - GRAPHQL_URL_4=http://${NOTIFICATION_HOSTNAME:-host.docker.internal:5012}/graphql
+      # - GRAPHQL_URL_5=http://${CHATBOT_HOSTNAME:-host.docker.internal:5016}/graphql
+      # - GRAPHQL_URL_6=http://${AIMZ_GENERAL_INTEGRATIONS_HOSTNAME:-host.docker.internal:5009}/graphql
+      # - GRAPHQL_URL_7=http://${AIMZ_DOCUMENT_STORE_HOSTNAME:-host.docker.internal:5000}/graphql
+      # - GRAPHQL_REQUEST_HEADER_0=Authorization
+      # - GRAPHQL_REQUEST_HEADER_1=Tenant
+      # - GRAPHQL_REQUEST_HEADER_2=TenantToken
 
 networks:
   backend_network:
