@@ -21,7 +21,7 @@ const buildHeaders = (builder: IHeadersBuilder): IHeadersBuilder => {
 }
 
 const graphqlUris = getENVArray("GRAPHQL_URL");
-const defaultGraphqlPollingIntervalSeconds = getenv.int("GRAPHQL_URL_POLLING_INTERVAL_SECONDS", 5);
+const defaultGraphqlPollingIntervalSeconds = getenv.int("GRAPHQL_URL_POLLING_INTERVAL_SECONDS", 60);
 const graphqlServices: AsyncApiIntrospector<any>[] = [];
 graphqlUris.forEach((graphqlUri, index) => {
   const graphqlService = introspect.graphql({

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "wunderctl start --debug",
-    "dev": "wunderctl up --debug",
-    "generate": "wunderctl generate --debug",
+    "start": "wunderctl start",
+    "dev": "wunderctl up",
+    "generate": "wunderctl generate",
     "check": "tsc"
   },
   "author": "",
