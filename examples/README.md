@@ -11,3 +11,6 @@ poetry install
 poetry shell
 python main.py
 ```
+
+# Todo:
+- Check out using graphql-ws: https://github.com/graphql-python/graphql-ws
